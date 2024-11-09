@@ -11,6 +11,10 @@ const Navbar = () => {
         {
             title: "Posts",
             path: "/posts"
+        },
+        {
+            title: "Meals",
+            path: "/meals"
         }
     ]
     if (pathName.includes('dashboard')) {
@@ -23,7 +27,7 @@ const Navbar = () => {
 
     return (
         <nav className="bg-red-400 px-6 py-4 flex justify-between items-center">
-            <h3 className="text-3xl">Logo <span className="text-cyan-300">Next</span> </h3>
+            <h3 className="text-3xl">Next <span className="text-cyan-300">Meal</span> </h3>
             <ul className="flex justify-between items-center space-x-4">
                 {
                     links?.map((link) => <Link key={link.path} href={link.path}>{link.title}</Link>)
