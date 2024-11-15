@@ -15,6 +15,10 @@ const Navbar = () => {
         {
             title: "Meals",
             path: "/meals"
+        },
+        {
+            title: "About",
+            path: "/about"
         }
     ]
     if (pathName.includes('dashboard')) {
