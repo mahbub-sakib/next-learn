@@ -1,4 +1,7 @@
 import React from 'react';
+import { Headland_One } from 'next/font/google';
+
+const headland = Headland_One({ weight: ['400'], subsets: ['latin'] })
 
 export const metadata = {
     title: "About",
@@ -8,8 +11,8 @@ export const metadata = {
 
 const page = () => {
     return (
-        <div>
-            <h6>About Page</h6>
+        <div className={`${headland.className} min-h-screen px-12 py-24`}>
+            <h6 className='text-3xl'>About Page</h6>
         </div>
     );
 };
