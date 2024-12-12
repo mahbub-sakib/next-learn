@@ -9,16 +9,17 @@ export const metadata = {
     keywords: ["about", "about page"]
 };
 
-const getTime = async () => {
-    const res = await fetch("http://localhost:3000/time", { next: { revalidate: 5 } });
-    const data = await res.json();
-    console.log(data);
-    return data.currentTime;
-}
+// const getTime = async () => {
+//     const res = await fetch("http://localhost:3000/time", { next: { revalidate: 5 } });
+//     const data = await res.json();
+//     console.log(data);
+//     return data.currentTime;
+// }
 
 const page = async () => {
 
-    const currentTime = await getTime();
+    const currentTime = new Date().toISOString();
+    // const currentTime = await getTime();
 
     return (
         <div className={`${headland.className} min-h-screen px-12 py-24`}>
