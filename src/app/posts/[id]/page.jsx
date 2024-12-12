@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 import React from 'react';
 
 const getDetailsPost = async (id) => {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+    const res = await fetch(`${process.env.API_URL}/posts/${id}`)
     const data = await res.json();
     // if (id == 1) {
     //     redirect(`/gallery`);
