@@ -1,5 +1,7 @@
 import React from 'react';
 import { Headland_One } from 'next/font/google';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../api/auth/[...nextauth]/route';
 
 const headland = Headland_One({ weight: ['400'], subsets: ['latin'] })
 
@@ -20,7 +22,8 @@ const page = async () => {
 
     const currentTime = new Date().toISOString();
     // const currentTime = await getTime();
-
+    const session = await getServerSession(authOptions);
+    console.log({ session });
     return (
         <div className={`${headland.className} min-h-screen px-12 py-24`}>
             <h6 className='text-3xl'>About Page</h6>
