@@ -1,5 +1,5 @@
 "use client";
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -27,19 +27,23 @@ const Navbar = () => {
         {
             title: "Gallery",
             path: "/gallery"
+        },
+        {
+            title: "Dashboard",
+            path: "/dashboard"
         }
     ]
 
     const handler = () => {
         router.push("/api/auth/signin");
     }
-    if (pathName.includes('dashboard')) {
-        return (
-            <div className='bg-green-400' >
-                Dashboard layout
-            </div >
-        )
-    }
+    // if (pathName.includes('dashboard')) {
+    //     return (
+    //         <div className='bg-green-400' >
+    //             Dashboard layout
+    //         </div >
+    //     )
+    // }
 
     return (
         <nav className="bg-red-400 px-6 py-4 flex justify-between items-center">
@@ -52,7 +56,7 @@ const Navbar = () => {
             {session.status !== "authenticated" ? <button onClick={handler} className='text-sky-900 p-4'>
                 Login
             </button> :
-                <button className='text-sky-900 p-4'>Logout</button>
+                <button onClick={() => signOut()} className='text-sky-900 p-4'>Logout</button>
             }
             <div>
                 <Image height={50} width={50} alt={session?.data?.user?.image || "User Image"} src={session?.data?.user?.image} />
