@@ -1,15 +1,16 @@
 "use client";
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useRouter } from 'next/router';
+import { usePathname, useRouter } from 'next/navigation';
+// import { useRouter } from 'next/router';
 import React from 'react';
 
 const Navbar = () => {
     const pathName = usePathname();
-    // const router = useRouter();
+    const router = useRouter();
     const session = useSession();
-    // console.log(session);
+    console.log(session);
     const links = [
         {
             title: "Posts",
@@ -28,6 +29,10 @@ const Navbar = () => {
             path: "/gallery"
         }
     ]
+
+    const handler = () => {
+        router.push("/api/auth/signin");
+    }
     if (pathName.includes('dashboard')) {
         return (
             <div className='bg-green-400' >
@@ -44,12 +49,17 @@ const Navbar = () => {
                     links?.map((link) => <Link key={link.path} href={link.path}>{link.title}</Link>)
                 }
             </ul>
-            {session.status === "authenticated" ? <button className='text-sky-900 p-4'>
+            {session.status !== "authenticated" ? <button onClick={handler} className='text-sky-900 p-4'>
                 Login
             </button> :
                 <button className='text-sky-900 p-4'>Logout</button>
             }
-
+            <div>
+                <Image height={50} width={50} alt={session?.data?.user?.image || "User Image"} src={session?.data?.user?.image} />
+                {session?.data?.user?.name}
+                <br />
+                {session?.data?.user?.type}
+            </div>
         </nav>
     );
 };
