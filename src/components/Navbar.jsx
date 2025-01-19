@@ -53,6 +53,11 @@ const Navbar = () => {
                     links?.map((link) => <Link key={link.path} href={link.path}>{link.title}</Link>)
                 }
             </ul>
+            <Link href={'/api/auth/signup'}>
+                <button className='mr-3 bg-white text-orange-600 font-semibold px-6 py-3'>
+                    Sign Up
+                </button>
+            </Link>
             {session.status !== "authenticated" ? <button onClick={handler} className='text-sky-900 p-4'>
                 Login
             </button> :
