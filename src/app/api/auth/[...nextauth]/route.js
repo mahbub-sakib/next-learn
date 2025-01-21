@@ -1,3 +1,4 @@
+import connectDB from "@/lib/connectDB";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from 'next-auth/providers/credentials'
 
@@ -22,8 +23,14 @@ export const authOptions = {
                 }
 
                 if (email) {
-                    const currentUser = users.find((user) => user.email === email)
+
+                    // const currentUser = users.find((user) => user.email === email)
+                    // console.log(currentUser);
+
+                    const db = await connectDB();
+                    const currentUser = await db.collection('users').findOne({ email });
                     console.log(currentUser);
+
                     if (currentUser) {
                         if (currentUser.password === password) {
                             // console.log(currentUser.image);
@@ -88,23 +95,23 @@ export const authOptions = {
 
 const handler = NextAuth(authOptions)
 
-const users = [
-    {
-        id: 1,
-        name: "sakib",
-        email: "s@gmail.com",
-        password: "password",
-        type: "admin",
-        image: "https://picsum.photos/seed/picsum/200/300"
-    },
-    {
-        id: 2,
-        name: "abony",
-        email: "a@gmail.com",
-        password: "123456",
-        type: "moderator",
-        image: "https://picsum.photos/seed/picsum/200/300"
-    }
-]
+// const users = [
+//     {
+//         id: 1,
+//         name: "sakib",
+//         email: "s@gmail.com",
+//         password: "password",
+//         type: "admin",
+//         image: "https://picsum.photos/seed/picsum/200/300"
+//     },
+//     {
+//         id: 2,
+//         name: "abony",
+//         email: "a@gmail.com",
+//         password: "123456",
+//         type: "moderator",
+//         image: "https://picsum.photos/seed/picsum/200/300"
+//     }
+// ]
 
 export { handler as GET, handler as POST }
